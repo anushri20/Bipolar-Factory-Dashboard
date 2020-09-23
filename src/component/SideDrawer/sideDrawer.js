@@ -30,6 +30,10 @@ import Graph2 from './graph2';
 import Card from './cards';
 import {Grid, Col, Row} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+
+import {Link} from '@material-ui/core';
 
 
 
@@ -48,6 +52,8 @@ export default function SideDrawer() {
   };
 
   return (
+    <React.Fragment>
+  
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -69,6 +75,7 @@ export default function SideDrawer() {
           <Typography variant="h6" noWrap >
             Clove
           </Typography>
+       
           <SearchIcon style={{paddingLeft:"70rem" }} />
           <SettingsIcon style={{ paddingRight:'8px'}} />
           <NotificationsIcon style={{ paddingRight:'8px'}} />
@@ -76,6 +83,8 @@ export default function SideDrawer() {
           <Typography  noWrap >
             Mandelyn Shane
           </Typography>
+          <Link href="/login" to="/login" style={{paddingLeft:'20px', textDecoration:'none', color:'black'}}>Login</Link>
+          
         </Toolbar>
       </AppBar>
       <Drawer
@@ -94,14 +103,20 @@ export default function SideDrawer() {
           </IconButton>
         
         </div>
+        
         <Divider />
+        
+         
+        
         <List>
           {['Dashboard', 'Application', 'Authentication', 'Pages'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
+              
             </ListItem>
           ))}
+          
         </List>
         <Divider />
         <List>
@@ -138,6 +153,7 @@ export default function SideDrawer() {
         <Col xs={12} md={4} lg={6}>
         
         <Graph2/>
+       
         </Col>
         </Row>
         
@@ -146,5 +162,6 @@ export default function SideDrawer() {
         
       </main>
     </div>
+    </React.Fragment>
   );
 }
