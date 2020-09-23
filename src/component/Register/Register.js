@@ -24,7 +24,8 @@ this.state={
 
 email: '',
 
-name:'',
+fisrt_name:'',
+last_name:'',
 
 mobile:'',
 
@@ -57,8 +58,9 @@ var apiBaseUrl = "https://5f69b4b9d808b90016bc050d.mockapi.io/";
 
 var data={
 
-"name":this.state.name,
+"first_name":this.state.first_name,
 
+"last_name":this.state.last_name,
 "user_email":this.state.email,
 
 "mobile_number":this.state.mobile,
@@ -110,7 +112,7 @@ let errors = {};
 
 let formIsValid = true;
 
-if (!this.state.name) {
+if (!this.state.first_name) {
 
 formIsValid = false;
 
@@ -118,9 +120,9 @@ errors["username"] = "*Please enter your username.";
 
 }
 
-if (typeof this.state.name !== "undefined") {
+if (typeof this.state.first_name !== "undefined") {
 
-if (!this.state.name.match(/^[a-zA-Z ]*$/)) {
+if (!this.state.fisrt_name.match(/^[a-zA-Z ]*$/)) {
 
 formIsValid = false;
 
@@ -222,11 +224,14 @@ return (
 
 <FormGroup>
 
-<Label for="exampleName">Name</Label>
+<Label for="exampleName">First Name</Label>
 
-<Input type="text" name="name" id="name" value={this.state.name} onChange={this.onChange} placeholder="Enter a name" />
+<Input type="text" name="first_name" id="first_name" value={this.state.first_name} onChange={this.onChange} placeholder="Enter your first name" />
 
-<div className="errorMsg">{this.state.errors.name}</div>
+
+<Label for="exampleLastName">Last Name</Label>
+
+<Input type="text" name="last_name" id="last_name" value={this.state.last_name} onChange={this.onChange} placeholder="Enter your last name" />
 
 </FormGroup>
 

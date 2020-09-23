@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -28,11 +28,11 @@ import useStyles from './style';
 import Graph from './graph';
 import Graph2 from './graph2';
 import Card from './cards';
-import {Grid, Col, Row} from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-
+import HomeFragment from '../HomeFragment';
+import Users from '../users/Users';
 import {Link} from '@material-ui/core';
 
 
@@ -42,6 +42,20 @@ export default function SideDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [fragment, setfragment] = useState("HOME")
+
+  const loadFragment = () => {
+    switch (fragment) {
+      case "HOME":
+        return <HomeFragment/>
+      case "FORM":
+        return <Register/>
+        case "USERS":
+          return <Users/>
+      default:
+        break;
+    }
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -109,33 +123,54 @@ export default function SideDrawer() {
          
         
         <List>
-          {['Dashboard', 'Application', 'Authentication', 'Pages'].map((text, index) => (
+          <ListItem button onClick= {e=>setfragment("HOME")}>
+            <ListItemIcon>
+              <InboxIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+
+          <ListItem button onClick= {e=>setfragment("FORM")}>
+            <ListItemIcon>
+              <InboxIcon/>
+              <ListItemText primary="Register" />
+            </ListItemIcon>
+          </ListItem>
+
+          <ListItem button onClick= {e=>setfragment("USERS")}>
+            <ListItemIcon>
+              <InboxIcon/>
+              <ListItemText primary="Users" />
+            </ListItemIcon>
+          </ListItem>
+          </List>
+          {/* {['Dashboard', 'Application', 'Authentication', 'Pages'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
               
             </ListItem>
-          ))}
+          ))} */}
           
-        </List>
+        
         <Divider />
-        <List>
+        {/* <List>
           {['Charts', 'Content', 'Utilities'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <PieChartIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <Divider/>
-        <List>
+        {/* <List>
           {['Components', 'Tables', 'Maps'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <TocIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -143,21 +178,9 @@ export default function SideDrawer() {
         })}
       >
         <div className={classes.drawerHeader}  />
-        <Row>
-          
-            <Col xs={12} md={8} lg={6}>
-        <Card/>
-        <Graph/>
-        </Col>
-        
-        <Col xs={12} md={4} lg={6}>
-        
-        <Graph2/>
-       
-        </Col>
-        </Row>
         
         
+        {loadFragment()}
         
         
       </main>
